@@ -25,4 +25,4 @@ Localisation de la base de données (serveurs de l'ecam ?)
 	• Total grade = average of whole uear grades
 	• Grades conversion--> numbers to letter (A, B, C, …)
 	• Management of constraints over grades
-Grades modified by "jury" if available!
+	• Grades modified by "jury" if available!
