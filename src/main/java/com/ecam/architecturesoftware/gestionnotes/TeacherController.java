@@ -1,0 +1,64 @@
+package com.ecam.architecturesoftware.gestionnotes;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+class TeacherController {
+
+    private final TeacherRepository repository;
+
+    TeacherController(TeacherRepository repository) {
+        this.repository = repository;
+    }
+
+
+    // Aggregate root
+    // tag::get-aggregate-root[]
+    @GetMapping("/teachers")
+    List<Teacher> all() {
+        return repository.findAll();
+    }
+    // end::get-aggregate-root[]
+
+    @PostMapping("/teachers")
+    Teacher newTeacher(@RequestBody Teacher newTeacher) {
+        return repository.save(newTeacher);
+    }
+
+    // Single item
+
+    @GetMapping("/teachers/{id}")
+    Teacher one(@PathVariable Long id) {
+
+        return repository.findById(id)
+                .orElseThrow(() -> new TeacherNotFoundException(id));
+    }
+
+    @PutMapping("/teachers/{id}")
+    Teacher replaceTeacher(@RequestBody Teacher newTeacher, @PathVariable Long id) {
+
+        return repository.findById(id)
+                .map(teacher -> {
+                    teacher.setName(newTeacher.getName());
+                    teacher.setRole(newTeacher.getRole());
+                    return repository.save(teacher);
+                })
+                .orElseGet(() -> {
+                    newTeacher.setId(id);
+                    return repository.save(newTeacher);
+                });
+    }
+
+    @DeleteMapping("/teachers/{id}")
+    void deleteStudent(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+}
