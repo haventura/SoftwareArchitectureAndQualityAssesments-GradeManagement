@@ -48,7 +48,6 @@ class TeacherController {
         return repository.findById(id)
                 .map(teacher -> {
                     teacher.setName(newTeacher.getName());
-                    teacher.setRole(newTeacher.getRole());
                     return repository.save(teacher);
                 })
                 .orElseGet(() -> {
@@ -58,7 +57,7 @@ class TeacherController {
     }
 
     @DeleteMapping("/teachers/{id}")
-    void deleteStudent(@PathVariable Long id) {
+    void deleteTeacher(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }
