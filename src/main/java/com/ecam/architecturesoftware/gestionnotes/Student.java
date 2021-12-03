@@ -7,15 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-class Employee {
+class Student {
 
     private @Id @GeneratedValue Long id;
     private String name;
     private String role;
 
-    Employee() {}
+    Student() {}
 
-    Employee(String name, String role) {
+    Student(String name, String role) {
 
         this.name = name;
         this.role = role;
@@ -50,11 +50,11 @@ class Employee {
 
         if (this == o)
             return true;
-        if (!(o instanceof Employee))
+        if (!(o instanceof Student))
             return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(this.id, employee.id) && Objects.equals(this.name, employee.name)
-                && Objects.equals(this.role, employee.role);
+        Student student = (Student) o;
+        return Objects.equals(this.id, student.id) && Objects.equals(this.name, student.name)
+                && Objects.equals(this.role, student.role);
     }
 
     @Override
@@ -64,6 +64,6 @@ class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\'' + '}';
+        return "Student{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\'' + '}';
     }
 }
