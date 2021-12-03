@@ -17,7 +17,10 @@ interface SectionRepository extends JpaRepository<Section, Long> {
 
 }
 
-
 interface CourseRepository extends JpaRepository<Course, Long> {
+
+}
+
+interface Course_Student_LinkRepository extends JpaRepository<Course, Long> {
 
 }
