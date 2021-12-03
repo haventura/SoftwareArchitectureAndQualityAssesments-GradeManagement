@@ -21,6 +21,6 @@ interface CourseRepository extends JpaRepository<Course, Long> {
 
 }
 
-interface Course_Student_LinkRepository extends JpaRepository<Course, Long> {
+interface Course_Student_LinkRepository extends JpaRepository<Course_Student_Link, Long> {
 
 }
