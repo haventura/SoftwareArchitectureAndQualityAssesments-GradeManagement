@@ -49,7 +49,7 @@ class Course_Student_LinkController {
                 .map(link -> {;
                     link.setFK_Student(newCourse_Student_Link.getFK_Student());
                     link.setFK_Course(newCourse_Student_Link.getFK_Course());
-                    link.setFK_Grade(newCourse_Student_Link.getFK_Grade());
+                    link.setGrade(newCourse_Student_Link.getGrade());
                     link.setSchoolYear(newCourse_Student_Link.getSchoolYear());
                     link.setSemester(newCourse_Student_Link.getSemester());
 

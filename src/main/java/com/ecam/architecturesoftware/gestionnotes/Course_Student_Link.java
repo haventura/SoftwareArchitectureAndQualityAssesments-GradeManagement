@@ -14,15 +14,15 @@ public class Course_Student_Link {
     Long id;
     private Long FK_Student ;
     private String FK_Course ;
-    private Long FK_Grade ;
+    private Float grade ;
     private Integer schoolYear;
     private Integer semester;
 
-    Course_Student_Link(Long FK_Student , String FK_Course, Long FK_Grade, Integer schoolYear, Integer semester) {
+    Course_Student_Link(Long FK_Student , String FK_Course, Float grade, Integer schoolYear, Integer semester) {
 
         this.FK_Student = FK_Student;
         this.FK_Course = FK_Course;
-        this.FK_Grade = FK_Grade;
+        this.grade = grade;
         this.schoolYear = schoolYear;
         this.semester = semester;
     }
@@ -52,12 +52,12 @@ public class Course_Student_Link {
         this.FK_Course = FK_Course;
     }
 
-    public Long getFK_Grade() {
-        return FK_Grade;
+    public Float getGrade() {
+        return grade;
     }
 
-    public void setFK_Grade(Long FK_Grade) {
-        this.FK_Grade = FK_Grade;
+    public void setGrade(Float grade) {
+        this.grade = grade;
     }
 
     public Integer getSchoolYear() {
@@ -87,7 +87,7 @@ public class Course_Student_Link {
         return Objects.equals(this.id, link.id)
                 && Objects.equals(this.FK_Student, link.FK_Student)
                 && Objects.equals(this.FK_Course, link.FK_Course)
-                && Objects.equals(this.FK_Grade, link.FK_Grade)
+                && Objects.equals(this.grade, link.grade)
                 && Objects.equals(this.schoolYear, link.schoolYear)
                 && Objects.equals(this.semester, link.semester);
 
@@ -95,11 +95,11 @@ public class Course_Student_Link {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.FK_Student, this.FK_Course, this.FK_Grade, this.schoolYear, this.semester);
+        return Objects.hash(this.id, this.FK_Student, this.FK_Course, this.grade, this.schoolYear, this.semester);
     }
 
     @Override
     public String toString() {
-        return "link{" + "id=" + this.id + ", FK_Student='" + this.FK_Student + ", FK_Course='" + this.FK_Course + ", FK_Grade='" + this.FK_Grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
+        return "link{" + "id=" + this.id + ", FK_Student='" + this.FK_Student + ", FK_Course='" + this.FK_Course + ", FK_Grade='" + this.grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
     }
 }
