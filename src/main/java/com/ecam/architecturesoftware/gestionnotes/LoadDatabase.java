@@ -25,8 +25,10 @@ class LoadDatabase {
             log.info("Preloading " + repositoryCourse.save(new Course("id3","python", "UE2", "pyt")));
             //
             log.info("Preloading " + repositorySection.save(new Section("UE1", "coursDeBase")));
+            log.info("Preloading " + repositorySection.save(new Section("UE2", "IOT Lab")));
             //
             log.info("Preloading " + repositoryTeacher.save(new Teacher("LRG", "André Lorge")));
+            log.info("Preloading " + repositoryTeacher.save(new Teacher("MLT", "Philipe Melotte")));
         };
     }
 }
