@@ -14,8 +14,9 @@ public class Teacher {
 
     Teacher() {}
 
-    Teacher(String name) {
+    Teacher(String id,String name) {
 
+        this.id = id;
         this.name = name;
     }
 
