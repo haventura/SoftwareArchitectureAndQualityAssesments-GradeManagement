@@ -9,23 +9,22 @@ import javax.persistence.Id;
 @Entity
 public class Course {
 
-    private @Id
-    @GeneratedValue
-    Long id;
+    private @Id String id;
     private String name;
-    private Integer FK_section ;
-    private Integer FK_teacher ;
+    private String FK_section ;
+    private String FK_teacher ;
 
     Course() {}
 
-    Course(String name , Integer FK_section, Integer FK_teacher) {
+    Course(String id,String name , String FK_section, String FK_teacher) {
 
         this.name = name;
         this.FK_section = FK_section;
         this.FK_teacher = FK_teacher;
+        this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -33,15 +32,15 @@ public class Course {
         return this.name;
     }
 
-    public Integer getFK_teacher() {
+    public String getFK_teacher() {
         return this.FK_teacher;
     }
 
-    public Integer getFK_section() {
+    public String getFK_section() {
         return this.FK_section;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,11 +48,11 @@ public class Course {
         this.name = name;
     }
 
-    public void setFK_section(Integer FK_section) {
+    public void setFK_section(String FK_section) {
         this.FK_section = FK_section;
     }
 
-    public void setFK_teacher(Integer FK_teacher) {
+    public void setFK_teacher(String FK_teacher) {
         this.FK_teacher = FK_teacher;
     }
 

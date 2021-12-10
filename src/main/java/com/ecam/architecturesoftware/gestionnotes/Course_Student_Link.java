@@ -13,12 +13,12 @@ public class Course_Student_Link {
     @GeneratedValue
     Long id;
     private Long FK_Student ;
-    private Long FK_Course ;
+    private String FK_Course ;
     private Long FK_Grade ;
     private Integer schoolYear;
     private Integer semester;
 
-    Course_Student_Link(Long FK_Student , Long FK_Course, Long FK_Grade, Integer schoolYear, Integer semester) {
+    Course_Student_Link(Long FK_Student , String FK_Course, Long FK_Grade, Integer schoolYear, Integer semester) {
 
         this.FK_Student = FK_Student;
         this.FK_Course = FK_Course;
@@ -44,11 +44,11 @@ public class Course_Student_Link {
         this.FK_Student = FK_Student;
     }
 
-    public Long getFK_Course() {
+    public String getFK_Course() {
         return FK_Course;
     }
 
-    public void setFK_Course(Long FK_Course) {
+    public void setFK_Course(String FK_Course) {
         this.FK_Course = FK_Course;
     }
 

@@ -8,29 +8,25 @@ import javax.persistence.Id;
 
 @Entity
 public class Section {
-    private @Id @GeneratedValue Long id;
+    private @Id String id;
     private String name;
-    private Long FK_course;
     Section() {}
 
-    Section(String name,Long FK_course) {
+    Section(String id,String name) {
 
         this.name = name;
-        this.FK_course = FK_course;
+        this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
     public String getName() {
         return this.name;
     }
-    public Long getFK_course() {
-        return this.FK_course;
-    }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -38,10 +34,6 @@ public class Section {
     public void setName(String name) {
         this.name = name;
     }
-    public void setFK_course(Long FK_course) {
-        this.FK_course = FK_course;
-    }
-
     @Override
     public boolean equals(Object o) {
 
@@ -50,17 +42,17 @@ public class Section {
         if (!(o instanceof Section))
             return false;
         Section section = (Section) o;
-        return Objects.equals(this.id, section.id) && Objects.equals(this.name, section.name) && Objects.equals(this.FK_course, section.FK_course);
+        return Objects.equals(this.id, section.id) && Objects.equals(this.name, section.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.FK_course);
+        return Objects.hash(this.id, this.name);
     }
 
     @Override
     public String toString() {
-        return "Section{" + "id=" + this.id + ", section='" + this.name + '\'' + ", FK_course ='" + this.FK_course + '\'' +'}';
+        return "Section{" + "id=" + this.id + ", section='" + this.name + '\'' +'}';
     }
 
 }

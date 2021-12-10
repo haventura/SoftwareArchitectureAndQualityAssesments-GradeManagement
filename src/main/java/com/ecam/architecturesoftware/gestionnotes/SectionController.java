@@ -36,19 +36,18 @@ class SectionController {
     // Single item
 
     @GetMapping("/sections/{id}")
-    Section one(@PathVariable Long id) {
+    Section one(@PathVariable String id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new SectionNotFoundException(id));
     }
 
     @PutMapping("/sections/{id}")
-    Section replaceSection(@RequestBody Section newSection, @PathVariable Long id) {
+    Section replaceSection(@RequestBody Section newSection, @PathVariable String id) {
 
         return repository.findById(id)
                 .map(section -> {
                     section.setName(newSection.getName());
-                    section.setFK_course(newSection.getFK_course());
                     return repository.save(section);
                 })
                 .orElseGet(() -> {
@@ -58,7 +57,7 @@ class SectionController {
     }
 
     @DeleteMapping("/sections/{id}")
-    void deleteSection(@PathVariable Long id) {
+    void deleteSection(@PathVariable String id) {
         repository.deleteById(id);
     }
 }

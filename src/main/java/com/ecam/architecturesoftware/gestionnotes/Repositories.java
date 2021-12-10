@@ -2,6 +2,8 @@ package com.ecam.architecturesoftware.gestionnotes;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 interface StudentRepository extends JpaRepository<Student, Long> {
 
 }
@@ -10,14 +12,14 @@ interface GradeRepository extends JpaRepository<Grade, Long> {
 
 }
 
-interface TeacherRepository extends JpaRepository<Teacher, Long> {
+interface TeacherRepository extends JpaRepository<Teacher, String> {
 
 }
-interface SectionRepository extends JpaRepository<Section, Long> {
+interface SectionRepository extends JpaRepository<Section, String> {
 
 }
 
-interface CourseRepository extends JpaRepository<Course, Long> {
+interface CourseRepository extends JpaRepository<Course, String> {
 
 }
 

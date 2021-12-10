@@ -20,11 +20,11 @@ class LoadDatabase {
             log.info("Preloading " + repository.save(new Student(20003l,"Jean Claude", "Master")));
             log.info("Preloading " + repository.save(new Student(20004l,"Dawid Krasowski", "DBArchitect")));
             //
-            log.info("Preloading " + repositoryCourse.save(new Course("math", 1, 1)));
-            log.info("Preloading " + repositoryCourse.save(new Course("langue", 1, 2)));
-            log.info("Preloading " + repositoryCourse.save(new Course("python", 2, 3)));
+            log.info("Preloading " + repositoryCourse.save(new Course("id1","math", "UE1", "mat")));
+            log.info("Preloading " + repositoryCourse.save(new Course("id2","langue", "UE1", "lan")));
+            log.info("Preloading " + repositoryCourse.save(new Course("id3","python", "UE2", "pyt")));
             //
-            log.info("Preloading " + repositorySection.save(new Section("coursDeBase", 2L)));
+            log.info("Preloading " + repositorySection.save(new Section("UE1", "coursDeBase")));
         };
     }
 }

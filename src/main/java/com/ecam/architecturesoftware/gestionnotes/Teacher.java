@@ -9,9 +9,7 @@ package com.ecam.architecturesoftware.gestionnotes;
 @Entity
 public class Teacher {
 
-    private @Id
-    @GeneratedValue
-    Long id;
+    private @Id String id;
     private String name;
 
     Teacher() {}
@@ -21,7 +19,7 @@ public class Teacher {
         this.name = name;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -29,7 +27,7 @@ public class Teacher {
         return this.name;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

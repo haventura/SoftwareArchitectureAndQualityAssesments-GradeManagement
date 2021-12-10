@@ -36,14 +36,14 @@ class CourseController {
     // Single item
 
     @GetMapping("/courses/{id}")
-    Course one(@PathVariable Long id) {
+    Course one(@PathVariable String id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     @PutMapping("/courses/{id}")
-    Course replaceCourse(@RequestBody Course newCourse, @PathVariable Long id) {
+    Course replaceCourse(@RequestBody Course newCourse, @PathVariable String id) {
 
         return repository.findById(id)
                 .map(course -> {
@@ -59,7 +59,7 @@ class CourseController {
     }
 
     @DeleteMapping("/courses/{id}")
-    void deleteCourse(@PathVariable Long id) {
+    void deleteCourse(@PathVariable String id) {
         repository.deleteById(id);
     }
 }

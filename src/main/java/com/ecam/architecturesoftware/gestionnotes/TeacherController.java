@@ -36,14 +36,14 @@ class TeacherController {
     // Single item
 
     @GetMapping("/teachers/{id}")
-    Teacher one(@PathVariable Long id) {
+    Teacher one(@PathVariable String id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new TeacherNotFoundException(id));
     }
 
     @PutMapping("/teachers/{id}")
-    Teacher replaceTeacher(@RequestBody Teacher newTeacher, @PathVariable Long id) {
+    Teacher replaceTeacher(@RequestBody Teacher newTeacher, @PathVariable String id) {
 
         return repository.findById(id)
                 .map(teacher -> {
@@ -57,7 +57,7 @@ class TeacherController {
     }
 
     @DeleteMapping("/teachers/{id}")
-    void deleteTeacher(@PathVariable Long id) {
+    void deleteTeacher(@PathVariable String id) {
         repository.deleteById(id);
     }
 }
