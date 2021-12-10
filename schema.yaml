@@ -1,0 +1,418 @@
+openapi: 3.0.2
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: 'https://api.server.test/v1'
+paths:
+  /students:
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-students
+      responses:
+        '201':
+          description: Created successfully
+        '409':
+          description: Conflict ID already in use
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  id: 0
+                  name: string
+                  courses:
+                    - M1T
+                    - CMT
+                    - ENG
+              properties:
+                id:
+                  type: number
+                name:
+                  type: string
+                  minLength: 1
+                courses:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - id
+                - name
+                - courses
+            examples: {}
+        description: ''
+      description: 'Register a new student with his unique id, name and his courses'
+  '/students/{id}':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: id of the student
+    get:
+      summary: ''
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    name: Jean Claude
+                    courses:
+                      - courseName: Math
+                        courseId: mat1
+                        teacherName: Marcel du Puits
+                        teacherId: M1P
+                        schoolYear: 2021
+                        semester: 2
+                        grade: 83
+                      - courseName: English
+                        courseId: eng4
+                        teacherName: Deborah Badaba
+                        teacherId: D6B
+                        schoolYear: 2021
+                        semester: 1
+                        grade: 25
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                  courses:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        courseName:
+                          type: string
+                          minLength: 1
+                        courseId:
+                          type: string
+                          minLength: 1
+                        teacherName:
+                          type: string
+                          minLength: 1
+                        teacherId:
+                          type: string
+                          minLength: 1
+                        schoolYear:
+                          type: number
+                        semester:
+                          type: number
+                        grade:
+                          type: number
+                      required:
+                        - courseName
+                        - courseId
+                        - teacherName
+                        - teacherId
+                        - schoolYear
+                        - semester
+                        - grade
+                required:
+                  - name
+                  - courses
+      operationId: get-students
+      description: Get the name and the courses associated with the specified student id
+    delete:
+      summary: ''
+      operationId: delete-students
+      responses:
+        '200':
+          description: OK student deleted
+        '404':
+          description: Student Not Found
+      description: Delete the student associated with the given id
+    put:
+      summary: ''
+      operationId: put-students
+      responses:
+        '200':
+          description: OK
+      description: Edit the name of a student and the courses he follow associated with the given key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  name: string
+                  courses:
+                    - M1T
+                    - ENG
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                courses:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - name
+                - courses
+            examples: {}
+  /courses:
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-courses
+      responses:
+        '200':
+          description: OK
+      description: 'Create a new course with the specified id, name and teacher id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                teacherId:
+                  type: string
+                  minLength: 1
+              required:
+                - id
+                - name
+                - teacherId
+              x-examples:
+                example-1:
+                  id: M1T
+                  name: Math
+                  teacherId: M2L
+  '/courses/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: id of the course
+    get:
+      summary: ''
+      operationId: get-courses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                  teacherId:
+                    type: string
+                    minLength: 1
+                  teacherName:
+                    type: string
+                    minLength: 1
+                  results:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - studentId
+                        - studentName
+                        - schoolYear
+                        - semester
+                        - grade
+                      properties:
+                        studentId:
+                          type: number
+                        studentName:
+                          type: string
+                          minLength: 1
+                        schoolYear:
+                          type: number
+                        semester:
+                          type: number
+                        grade:
+                          type: number
+                required:
+                  - name
+                  - teacherId
+                  - teacherName
+                  - results
+                x-examples:
+                  example-1:
+                    name: math
+                    teacherId: D3O
+                    teacherName: Dawid Omaghat
+                    results:
+                      - studentId: 20283
+                        studentName: Jean Marcel
+                        schoolYear: 2021
+                        semester: 2
+                        grade: 46
+                      - studentId: 19843
+                        studentName: Claude Michaud
+                        schoolYear: 2020
+                        semester: 1
+                        grade: 57
+      description: 'Get the name, teacher and all student results associated with the given courses id'
+    put:
+      summary: ''
+      operationId: put-courses
+      responses:
+        '200':
+          description: OK
+      description: Edit the course name and teacher id associated with a given course id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                teacherID:
+                  type: string
+                  minLength: 1
+              required:
+                - name
+                - teacherID
+              x-examples:
+                example-1:
+                  name: English
+                  teacherID: B2O
+    delete:
+      summary: ''
+      operationId: delete-courses
+      responses:
+        '200':
+          description: OK
+      description: Delete the course associated with the given id
+  /teachers:
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-teachers
+      responses:
+        '200':
+          description: OK
+      description: Register a new teacher with the given id and name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+              required:
+                - id
+                - name
+              x-examples:
+                example-1:
+                  id: ROC
+                  name: Romain O'Colle
+  '/teachers/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: id of the teacher
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                  courses:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - courseID
+                        - courseName
+                      properties:
+                        courseID:
+                          type: string
+                          minLength: 1
+                        courseName:
+                          type: string
+                          minLength: 1
+                required:
+                  - name
+                  - courses
+                x-examples:
+                  example-1:
+                    name: Jean David
+                    courses:
+                      - courseID: MAT
+                        courseName: Math
+                      - courseID: ENG
+                        courseName: English
+      operationId: get-teachers
+      description: Get the teacher and his courses associated with the given id
+    put:
+      summary: ''
+      operationId: put-teachers
+      responses:
+        '200':
+          description: OK
+      description: Edit the teacher name associated with the given id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+              required:
+                - name
+              x-examples:
+                example-1:
+                  name: Kevin Daniel
+    delete:
+      summary: ''
+      operationId: delete-teachers
+      responses:
+        '200':
+          description: OK
+      description: Delete the teacher associated with the given id
