@@ -10,14 +10,14 @@ class Student {
 
     private @Id Long id;
     private String name;
-    private String role;
+
 
     Student() {}
 
-    Student(Long id, String name, String role) {
+    Student(Long id, String name) {
 
         this.name = name;
-        this.role = role;
+
         this.id = id;
     }
 
@@ -29,9 +29,7 @@ class Student {
         return this.name;
     }
 
-    public String getRole() {
-        return this.role;
-    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -41,9 +39,7 @@ class Student {
         this.name = name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -53,17 +49,16 @@ class Student {
         if (!(o instanceof Student))
             return false;
         Student student = (Student) o;
-        return Objects.equals(this.id, student.id) && Objects.equals(this.name, student.name)
-                && Objects.equals(this.role, student.role);
+        return Objects.equals(this.id, student.id) && Objects.equals(this.name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.role);
+        return Objects.hash(this.id, this.name);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\'' + '}';
+        return "Student{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" +  '}';
     }
 }

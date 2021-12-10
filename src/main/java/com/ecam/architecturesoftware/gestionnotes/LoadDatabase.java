@@ -15,10 +15,10 @@ class LoadDatabase {
     CommandLineRunner initDatabase(StudentRepository repository, CourseRepository repositoryCourse,SectionRepository repositorySection) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new Student(20001l,"Bilbo Baggins", "burglar")));
-            log.info("Preloading " + repository.save(new Student(20002l, "Frodo Baggins", "thief")));
-            log.info("Preloading " + repository.save(new Student(20003l,"Jean Claude", "Master")));
-            log.info("Preloading " + repository.save(new Student(20004l,"Dawid Krasowski", "DBArchitect")));
+            log.info("Preloading " + repository.save(new Student(20001l,"Bilbo Baggins")));
+            log.info("Preloading " + repository.save(new Student(20002l, "Frodo Baggins")));
+            log.info("Preloading " + repository.save(new Student(20003l,"Jean Claude")));
+            log.info("Preloading " + repository.save(new Student(20004l,"Dawid Krasowski")));
             //
             log.info("Preloading " + repositoryCourse.save(new Course("id1","math", "UE1", "mat")));
             log.info("Preloading " + repositoryCourse.save(new Course("id2","langue", "UE1", "lan")));

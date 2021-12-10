@@ -8,7 +8,10 @@ interface StudentRepository extends JpaRepository<Student, Long> {
 
 }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 interface TeacherRepository extends JpaRepository<Teacher, String> {
 
 }

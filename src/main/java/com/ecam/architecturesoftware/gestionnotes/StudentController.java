@@ -48,7 +48,7 @@ class StudentController {
         return repository.findById(id)
                 .map(student -> {
                     student.setName(newStudent.getName());
-                    student.setRole(newStudent.getRole());
+
                     return repository.save(student);
                 })
                 .orElseGet(() -> {
