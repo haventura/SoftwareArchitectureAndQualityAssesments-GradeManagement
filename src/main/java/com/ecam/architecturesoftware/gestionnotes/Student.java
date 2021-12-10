@@ -3,22 +3,22 @@ package com.ecam.architecturesoftware.gestionnotes;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 class Student {
 
-    private @Id @GeneratedValue Long id;
+    private @Id Long id;
     private String name;
     private String role;
 
     Student() {}
 
-    Student(String name, String role) {
+    Student(Long id, String name, String role) {
 
         this.name = name;
         this.role = role;
+        this.id = id;
     }
 
     public Long getId() {
