@@ -11,16 +11,16 @@ public class Course {
 
     private @Id String id;
     private String name;
-    private String FK_section ;
-    private String FK_teacher ;
+    private String fk_Section ;
+    private String fk_Teacher ;
 
     Course() {}
 
-    Course(String id,String name , String FK_section, String FK_teacher) {
+    Course(String id,String name , String fk_Section, String fk_Teacher) {
 
         this.name = name;
-        this.FK_section = FK_section;
-        this.FK_teacher = FK_teacher;
+        this.fk_Section = fk_Section;
+        this.fk_Teacher = fk_Teacher;
         this.id = id;
     }
 
@@ -32,12 +32,12 @@ public class Course {
         return this.name;
     }
 
-    public String getFK_teacher() {
-        return this.FK_teacher;
+    public String getfk_Teacher() {
+        return this.fk_Teacher;
     }
 
-    public String getFK_section() {
-        return this.FK_section;
+    public String getfk_Section() {
+        return this.fk_Section;
     }
 
     public void setId(String id) {
@@ -48,12 +48,12 @@ public class Course {
         this.name = name;
     }
 
-    public void setFK_section(String FK_section) {
-        this.FK_section = FK_section;
+    public void setfk_Section(String fk_Section) {
+        this.fk_Section = fk_Section;
     }
 
-    public void setFK_teacher(String FK_teacher) {
-        this.FK_teacher = FK_teacher;
+    public void setfk_Teacher(String FK_teacher) {
+        this.fk_Teacher = fk_Teacher;
     }
 
     @Override
@@ -66,17 +66,17 @@ public class Course {
         Course course = (Course) o;
         return Objects.equals(this.id, course.id)
                 && Objects.equals(this.name, course.name)
-                && Objects.equals(this.FK_section, course.FK_section)
-                && Objects.equals(this.FK_teacher, course.FK_teacher);
+                && Objects.equals(this.fk_Section, course.fk_Section)
+                && Objects.equals(this.fk_Teacher, course.fk_Teacher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.FK_section, this.FK_teacher);
+        return Objects.hash(this.id, this.name, this.fk_Section, this.fk_Teacher);
     }
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + this.id + ", name='" + this.name + ", FK_section='" + this.FK_section + ", FK_teacher='" + this.FK_teacher + '\'' + '}';
+        return "Course{" + "id=" + this.id + ", name='" + this.name + ", fk_Section='" + this.fk_Section + ", fk_Teacher='" + this.fk_Teacher + '\'' + '}';
     }
 }

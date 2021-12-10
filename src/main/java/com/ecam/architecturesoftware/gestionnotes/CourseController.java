@@ -48,8 +48,8 @@ class CourseController {
         return repository.findById(id)
                 .map(course -> {
                     course.setName(newCourse.getName());
-                    course.setFK_section(newCourse.getFK_section());
-                    course.setFK_teacher(newCourse.getFK_teacher());
+                    course.setfk_Section(newCourse.getfk_Section());
+                    course.setfk_Teacher(newCourse.getfk_Teacher());
                     return repository.save(course);
                 })
                 .orElseGet(() -> {
