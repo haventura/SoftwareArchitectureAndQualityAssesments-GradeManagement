@@ -12,16 +12,16 @@ public class Course_Student_Link {
     private @Id
     @GeneratedValue
     Long id;
-    private Long FK_Student ;
-    private String FK_Course ;
+    private Long fk_Student ;
+    private String fk_Course ;
     private Float grade ;
     private Integer schoolYear;
     private Integer semester;
 
-    Course_Student_Link(Long FK_Student , String FK_Course, Float grade, Integer schoolYear, Integer semester) {
+    Course_Student_Link(Long fk_Student , String fk_Course, Float grade, Integer schoolYear, Integer semester) {
 
-        this.FK_Student = FK_Student;
-        this.FK_Course = FK_Course;
+        this.fk_Student = fk_Student;
+        this.fk_Course = fk_Course;
         this.grade = grade;
         this.schoolYear = schoolYear;
         this.semester = semester;
@@ -37,19 +37,19 @@ public class Course_Student_Link {
     }
 
     public Long getFK_Student() {
-        return FK_Student;
+        return fk_Student;
     }
 
     public void setFK_Student(Long FK_Student) {
-        this.FK_Student = FK_Student;
+        this.fk_Student = fk_Student;
     }
 
     public String getFK_Course() {
-        return FK_Course;
+        return fk_Course;
     }
 
     public void setFK_Course(String FK_Course) {
-        this.FK_Course = FK_Course;
+        this.fk_Course = fk_Course;
     }
 
     public Float getGrade() {
@@ -85,8 +85,8 @@ public class Course_Student_Link {
             return false;
         Course_Student_Link link = (Course_Student_Link) o;
         return Objects.equals(this.id, link.id)
-                && Objects.equals(this.FK_Student, link.FK_Student)
-                && Objects.equals(this.FK_Course, link.FK_Course)
+                && Objects.equals(this.fk_Student, link.fk_Student)
+                && Objects.equals(this.fk_Course, link.fk_Course)
                 && Objects.equals(this.grade, link.grade)
                 && Objects.equals(this.schoolYear, link.schoolYear)
                 && Objects.equals(this.semester, link.semester);
@@ -95,11 +95,11 @@ public class Course_Student_Link {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.FK_Student, this.FK_Course, this.grade, this.schoolYear, this.semester);
+        return Objects.hash(this.id, this.fk_Student, this.fk_Course, this.grade, this.schoolYear, this.semester);
     }
 
     @Override
     public String toString() {
-        return "link{" + "id=" + this.id + ", FK_Student='" + this.FK_Student + ", FK_Course='" + this.FK_Course + ", FK_Grade='" + this.grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
+        return "link{" + "id=" + this.id + ", fk_Student='" + this.fk_Student + ", fk_Course='" + this.fk_Course + ", Grade='" + this.grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
     }
 }
