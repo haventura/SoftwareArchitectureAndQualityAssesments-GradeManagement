@@ -57,14 +57,12 @@ class Student {
 class Course {
     private @Id String id;
     private String name;
-    private String fk_Section ;
     private String fk_Teacher ;
 
     public Course() {}
 
-    Course(String id,String name , String fk_Section, String fk_Teacher) {
+    Course(String id, String name, String fk_Teacher) {
         this.name = name;
-        this.fk_Section = fk_Section;
         this.fk_Teacher = fk_Teacher;
         this.id = id;
     }
@@ -81,20 +79,12 @@ class Course {
         return this.fk_Teacher;
     }
 
-    public String getfk_Section() {
-        return this.fk_Section;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setfk_Section(String fk_Section) {
-        this.fk_Section = fk_Section;
     }
 
     public void setfk_Teacher(String FK_teacher) {
@@ -110,18 +100,17 @@ class Course {
         Course course = (Course) o;
         return Objects.equals(this.id, course.id)
                 && Objects.equals(this.name, course.name)
-                && Objects.equals(this.fk_Section, course.fk_Section)
                 && Objects.equals(this.fk_Teacher, course.fk_Teacher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.fk_Section, this.fk_Teacher);
+        return Objects.hash(this.id, this.name, this.fk_Teacher);
     }
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + this.id + ", name='" + this.name + ", fk_Section='" + this.fk_Section + ", fk_Teacher='" + this.fk_Teacher + '\'' + '}';
+        return "Course{" + "id=" + this.id + ", name='" + this.name + ", fk_Teacher='" + this.fk_Teacher + '\'' + '}';
     }
 }
 
@@ -266,7 +255,7 @@ class Result {
 
     @Override
     public String toString() {
-        return "link{" + "id=" + this.id + ", fk_Student='" + this.fk_Student + ", fk_Course='" + this.fk_Course + ", Grade='" + this.grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
+        return "result{" + "id=" + this.id + ", fk_Student='" + this.fk_Student + ", fk_Course='" + this.fk_Course + ", Grade='" + this.grade + ", schoolYear='" + this.schoolYear + ", semester='" + this.semester + '\'' + '}';
     }
 }
 

@@ -1,8 +1,5 @@
 package com.ecam.architecturesoftware.gestionnotes;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class MainController {
-    private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
-    private final TeacherRepository teacherRepository;
+    private final StudentsRepository studentRepository;
+    private final CoursesRepository courseRepository;
+    private final TeachersRepository teacherRepository;
     private final ResultsRepository resultsRepository;
 
-    MainController(StudentRepository studentRepository, CourseRepository courseRepository, TeacherRepository teacherRepository, ResultsRepository resultsRepository) {
+    MainController(StudentsRepository studentRepository, CoursesRepository courseRepository, TeachersRepository teacherRepository, ResultsRepository resultsRepository) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
         this.teacherRepository = teacherRepository;
@@ -73,7 +70,6 @@ class MainController {
         return courseRepository.findById(id)
                 .map(course -> {
                     course.setName(newCourse.getName());
-                    course.setfk_Section(newCourse.getfk_Section());
                     course.setfk_Teacher(newCourse.getfk_Teacher());
                     return courseRepository.save(course);
                 })

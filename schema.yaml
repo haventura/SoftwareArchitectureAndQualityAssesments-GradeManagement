@@ -35,17 +35,12 @@ paths:
                 name:
                   type: string
                   minLength: 1
-                courses:
-                  type: array
-                  items:
-                    type: string
               required:
                 - id
                 - name
-                - courses
             examples: {}
         description: ''
-      description: 'Register a new student with his unique id, name and his courses'
+      description: Register a new student with his unique id and name
   '/students/{id}':
     parameters:
       - schema:
@@ -84,47 +79,14 @@ paths:
                         semester: 1
                         grade: 25
                 properties:
+                  id:
+                    type: number
                   name:
                     type: string
-                    minLength: 1
-                  courses:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      type: object
-                      properties:
-                        courseName:
-                          type: string
-                          minLength: 1
-                        courseId:
-                          type: string
-                          minLength: 1
-                        teacherName:
-                          type: string
-                          minLength: 1
-                        teacherId:
-                          type: string
-                          minLength: 1
-                        schoolYear:
-                          type: number
-                        semester:
-                          type: number
-                        grade:
-                          type: number
-                      required:
-                        - courseName
-                        - courseId
-                        - teacherName
-                        - teacherId
-                        - schoolYear
-                        - semester
-                        - grade
                 required:
-                  - name
-                  - courses
+                  - id
       operationId: get-students
-      description: Get the name and the courses associated with the specified student id
+      description: Get the id and name associated with the specified student id
     delete:
       summary: ''
       operationId: delete-students
@@ -140,7 +102,7 @@ paths:
       responses:
         '200':
           description: OK
-      description: Edit the name of a student and the courses he follow associated with the given key
+      description: Edit the name of a student associated with the given id
       requestBody:
         content:
           application/json:
@@ -157,13 +119,8 @@ paths:
                 name:
                   type: string
                   minLength: 1
-                courses:
-                  type: array
-                  items:
-                    type: string
               required:
                 - name
-                - courses
             examples: {}
   /courses:
     parameters: []
@@ -218,44 +175,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  name:
-                    type: string
-                    minLength: 1
-                  teacherId:
-                    type: string
-                    minLength: 1
-                  teacherName:
-                    type: string
-                    minLength: 1
-                  results:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                        - studentId
-                        - studentName
-                        - schoolYear
-                        - semester
-                        - grade
-                      properties:
-                        studentId:
-                          type: number
-                        studentName:
-                          type: string
-                          minLength: 1
-                        schoolYear:
-                          type: number
-                        semester:
-                          type: number
-                        grade:
-                          type: number
-                required:
-                  - name
-                  - teacherId
-                  - teacherName
-                  - results
                 x-examples:
                   example-1:
                     name: math
@@ -272,7 +191,19 @@ paths:
                         schoolYear: 2020
                         semester: 1
                         grade: 57
-      description: 'Get the name, teacher and all student results associated with the given courses id'
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                  teacherId:
+                    type: string
+                    minLength: 1
+                required:
+                  - name
+                  - teacherId
+      description: Get the name and teacher id of the given course id
     put:
       summary: ''
       operationId: put-courses
@@ -345,7 +276,7 @@ paths:
         required: true
         description: id of the teacher
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags: []
       responses:
         '200':
@@ -355,28 +286,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  name:
-                    type: string
-                    minLength: 1
-                  courses:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                        - courseID
-                        - courseName
-                      properties:
-                        courseID:
-                          type: string
-                          minLength: 1
-                        courseName:
-                          type: string
-                          minLength: 1
-                required:
-                  - name
-                  - courses
                 x-examples:
                   example-1:
                     name: Jean David
@@ -385,6 +294,14 @@ paths:
                         courseName: Math
                       - courseID: ENG
                         courseName: English
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                    minLength: 1
+                required:
+                  - name
       operationId: get-teachers
       description: Get the teacher and his courses associated with the given id
     put:
@@ -416,3 +333,160 @@ paths:
         '200':
           description: OK
       description: Delete the teacher associated with the given id
+  /results:
+    post:
+      summary: ''
+      operationId: post-results
+      responses:
+        '200':
+          description: OK
+      description: Associate a student and a course with the given result
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                studentId:
+                  type: number
+                courseId:
+                  type: string
+                  minLength: 1
+                schoolYear:
+                  type: number
+                semester:
+                  type: number
+                grade:
+                  type: number
+              required:
+                - studentId
+                - courseId
+                - schoolYear
+                - semester
+                - grade
+              x-examples:
+                example-1:
+                  studentId: 20283
+                  courseId: M1T
+                  schoolYear: 2020
+                  semester: 2
+                  grade: 78
+            examples: {}
+    get:
+      summary: ''
+      operationId: get-results
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    studentId: 0
+                    courseId: string
+                    schoolYear: 0
+                    semester: 0
+                    grade: 0
+                properties:
+                  studentId:
+                    type: number
+                  courseId:
+                    type: string
+                  schoolYear:
+                    type: number
+                  semester:
+                    type: number
+                  grade:
+                    type: number
+                required:
+                  - schoolYear
+                  - semester
+                  - grade
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                studentId:
+                  type: number
+                courseId:
+                  type: string
+                  minLength: 1
+              required:
+                - studentId
+                - courseId
+              x-examples:
+                example-1:
+                  studentId: 20283
+                  courseId: M1T
+    put:
+      summary: ''
+      operationId: put-results
+      responses:
+        '200':
+          description: OK
+      description: Edit the result of a student for the given course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                studentId:
+                  type: number
+                courseId:
+                  type: string
+                  minLength: 1
+                schoolYear:
+                  type: number
+                semester:
+                  type: number
+                grade:
+                  type: number
+              required:
+                - studentId
+                - courseId
+                - schoolYear
+                - semester
+                - grade
+              x-examples:
+                example-1:
+                  studentId: 0
+                  courseId: string
+                  schoolYear: 0
+                  semester: 0
+                  grade: 0
+            examples: {}
+    delete:
+      summary: ''
+      operationId: delete-results
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                studentId:
+                  type: number
+                courseId:
+                  type: string
+                  minLength: 1
+              required:
+                - studentId
+                - courseId
+              x-examples:
+                example-1:
+                  studentId: 0
+                  courseId: string
+      description: Delete the result of a student for the given course
