@@ -1,40 +1,41 @@
 package com.ecam.architecturesoftware.gestionnotes;
 
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-public class MainController {
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+class MainController {
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
+    private final ResultsRepository resultsRepository;
 
-    MainController(StudentRepository studentRepository, CourseRepository courseRepository, TeacherRepository teacherRepository) {
+    MainController(StudentRepository studentRepository, CourseRepository courseRepository, TeacherRepository teacherRepository, ResultsRepository resultsRepository) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
         this.teacherRepository = teacherRepository;
+        this.resultsRepository = resultsRepository;
     }
     //===========================Students=======================================
-    /*
-    @GetMapping("/students")
-    List<Student> allStudents()
-    {
-        return studentRepository.findAll();
-    }
-    */
     @PostMapping("/students")
     Student newStudent(@RequestBody Student newStudent)
     {
         return studentRepository.save(newStudent);
     }
-
     @GetMapping("/students/{id}")
     Student oneStudent(@PathVariable Long id)
     {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
     }
-
     @PutMapping("/students/{id}")
     Student replaceStudent(@RequestBody Student newStudent, @PathVariable Long id)
     {
@@ -49,32 +50,23 @@ public class MainController {
                     return studentRepository.save(newStudent);
                 });
     }
-
     @DeleteMapping("/students/{id}")
     void deleteStudent(@PathVariable Long id)
     {
         studentRepository.deleteById(id);
     }
     //===========================Courses=======================================
-    @GetMapping("/courses")
-    List<Course> allCourses()
-    {
-        return courseRepository.findAll();
-    }
-
     @PostMapping("/courses")
     Course newCourse(@RequestBody Course newCourse)
     {
         return courseRepository.save(newCourse);
     }
-
     @GetMapping("/courses/{id}")
     Course oneCourse(@PathVariable String id)
     {
         return courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
     }
-
     @PutMapping("/courses/{id}")
     Course replaceCourse(@RequestBody Course newCourse, @PathVariable String id)
     {
@@ -90,35 +82,23 @@ public class MainController {
                     return courseRepository.save(newCourse);
                 });
     }
-
     @DeleteMapping("/courses/{id}")
     void deleteCourse(@PathVariable String id)
     {
         courseRepository.deleteById(id);
     }
-
     //===========================Teachers=======================================
-
-    @GetMapping("/teachers")
-    List<Teacher> allTeachers()
-    {
-        return teacherRepository.findAll();
-    }
-
     @PostMapping("/teachers")
     Teacher newTeacher(@RequestBody Teacher newTeacher)
     {
         return teacherRepository.save(newTeacher);
     }
-
     @GetMapping("/teachers/{id}")
     Teacher oneTeacher(@PathVariable String id)
     {
-
         return teacherRepository.findById(id)
                 .orElseThrow(() -> new TeacherNotFoundException(id));
     }
-
     @PutMapping("/teachers/{id}")
     Teacher replaceTeacher(@RequestBody Teacher newTeacher, @PathVariable String id)
     {
@@ -132,10 +112,44 @@ public class MainController {
                     return teacherRepository.save(newTeacher);
                 });
     }
-
     @DeleteMapping("/teachers/{id}")
     void deleteTeacher(@PathVariable String id)
     {
         teacherRepository.deleteById(id);
+    }
+    //===============================Results=====================================
+    @PostMapping("/results")
+    Result newResult(@RequestBody Result newCourse_Student_Link)
+    {
+        return resultsRepository.save(newCourse_Student_Link);
+    }
+    @GetMapping("/results/{id}")
+    Result one(@PathVariable Long id)
+    {
+        return resultsRepository.findById(id)
+                .orElseThrow(() -> new ResultNotFoundException(id));
+    }
+    @PutMapping("/results/{id}")
+    Result replaceResult(@RequestBody Result newResult, @PathVariable Long id)
+    {
+        return resultsRepository.findById(id)
+                .map(result -> {;
+                    result.setFK_Student(newResult.getFK_Student());
+                    result.setFK_Course(newResult.getFK_Course());
+                    result.setGrade(newResult.getGrade());
+                    result.setSchoolYear(newResult.getSchoolYear());
+                    result.setSemester(newResult.getSemester());
+
+                    return resultsRepository.save(result);
+                })
+                .orElseGet(() -> {
+                    newResult.setId(id);
+                    return resultsRepository.save(newResult);
+                });
+    }
+    @DeleteMapping("/results/{id}")
+    void deleteResult(@PathVariable Long id)
+    {
+        resultsRepository.deleteById(id);
     }
 }
