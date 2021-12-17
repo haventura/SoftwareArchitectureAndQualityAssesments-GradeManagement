@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 class MainController {
@@ -32,6 +33,11 @@ class MainController {
     {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
+    }
+    @GetMapping("/students")
+    List<Student> allStudents()
+    {
+        return studentRepository.findAll();
     }
     @PutMapping("/students/{id}")
     Student replaceStudent(@RequestBody Student newStudent, @PathVariable Long id)
@@ -64,6 +70,11 @@ class MainController {
         return courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
     }
+    @GetMapping("/courses")
+    List<Course> allCourses()
+    {
+        return courseRepository.findAll();
+    }
     @PutMapping("/courses/{id}")
     Course replaceCourse(@RequestBody Course newCourse, @PathVariable String id)
     {
@@ -95,6 +106,11 @@ class MainController {
         return teacherRepository.findById(id)
                 .orElseThrow(() -> new TeacherNotFoundException(id));
     }
+    @GetMapping("/teachers")
+    List<Teacher> allTeachers()
+    {
+        return teacherRepository.findAll();
+    }
     @PutMapping("/teachers/{id}")
     Teacher replaceTeacher(@RequestBody Teacher newTeacher, @PathVariable String id)
     {
@@ -124,6 +140,11 @@ class MainController {
     {
         return resultsRepository.findById(id)
                 .orElseThrow(() -> new ResultNotFoundException(id));
+    }
+    @GetMapping("/results")
+    List<Result> allResults()
+    {
+        return resultsRepository.findAll();
     }
     @PutMapping("/results/{id}")
     Result replaceResult(@RequestBody Result newResult, @PathVariable Long id)
